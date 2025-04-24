@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>stems - Affordable Housing Solutions</title>
+    <meta name="description" content="Accelerate LIHTC Projects from Application to Equity with One Platform" />
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- ZCal Widget Script -->
+    <script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
+    
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#00BA34",
+              "primary-hover": "#00a82f",
+            }
+          }
+        }
+      }
+    </script>
+    
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+    </style>
+  </head>
+
+  <body class="min-h-screen bg-gradient-to-b from-white to-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center">
+            <span class="text-3xl font-medium text-gray-900 border-b-2 border-[#00BA34] pb-1">stems</span>
+          </div>
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="#features" class="text-gray-700 hover:text-gray-900">Features</a>
+            <a href="#benefits" class="text-gray-700 hover:text-gray-900">Benefits</a>
+            <button class="text-gray-700 hover:text-gray-900 px-4 py-2">Sign In</button>
+            <a href="https://experience.arcgis.com/experience/f9b1ccf48e864ac8af8014cbb89371b8/#data_s=id%3AdataSource_1-19249343897-layer-20%3A12%2Cid%3AdataSource_1-191fcd17567-layer-20%3A5" 
+               target="_blank"
+               class="inline-flex items-center border border-[#00BA34] text-[#00BA34] px-4 py-2 rounded hover:bg-[#00BA34]/10">
+              CA Excess Sites
+              <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-4 w-4" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+            </a>
+            <button 
+              onclick="openScheduler()" 
+              class="inline-flex items-center bg-[#00BA34] hover:bg-[#00a82f] text-white px-4 py-2 rounded">
+              Schedule Demo
+            </button>
+          </div>
+          <!-- Mobile menu button -->
+          <div class="md:hidden flex items-center">
+            <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-900 focus:outline-none">
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+          <a href="#features" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900">Features</a>
+          <a href="#benefits" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900">Benefits</a>
+          <a href="https://experience.arcgis.com/experience/f9b1ccf48e864ac8af8014cbb89371b8/#data_s=id%3AdataSource_1-19249343897-layer-20%3A12%2Cid%3AdataSource_1-191fcd17567-layer-20%3A5" 
+             target="_blank" 
+             class="block px-3 py-2 text-base font-medium text-[#00BA34]">CA Excess Sites</a>
+          <button 
+            onclick="openScheduler()" 
+            class="block w-full text-left px-3 py-2 text-base font-medium text-white bg-[#00BA34] rounded mt-2">
+            Schedule Demo
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Meeting Scheduler Modal -->
+    <div id="scheduler-modal" class="hidden fixed inset-0 z-50 overflow-y-auto">
+      <div class="flex items-center justify-center min-h-screen px-4">
+        <div class="fixed inset-0 bg-black/80 transition-opacity"></div>
+        <div class="relative bg-white p-6 max-w-[1100px] w-full mx-auto rounded-lg shadow-lg">
+          <button 
+            onclick="closeScheduler()" 
+            class="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <span class="sr-only">Close</span>
+          </button>
+          
+          <!-- Updated iframe with background -->
+          <iframe 
+            src="https://zcal.co/emb/stems?embed=1&embedType=iframe" 
+            loading="lazy" 
+            class="w-full min-h-[544px] border-none bg-white" 
+            id="zcal-iframe" 
+            scrolling="no"
+            style="min-height: 544px; border: none; width: 1096px; background-color: #ffffff;"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center">
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            Building Affordable Housing Shouldn't Take
+            <span class="text-[#00BA34]"> Years of Paperwork</span>
+          </h1>
+          <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            Accelerate LIHTC Projects from Application to Equity with One Platform. Save time, reduce errors, and connect with the right investors.
+          </p>
+          <button 
+            onclick="openScheduler()"
+            class="inline-flex items-center bg-[#00BA34] hover:bg-[#00a82f] text-white px-8 py-3 rounded text-lg">
+            Schedule a Demo 
+            <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-4 w-4" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pain Points Section -->
+    <section class="py-20 bg-white" id="features">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center mb-16">Key Challenges We Solve</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="p-8 rounded-xl bg-gradient-to-b from-gray-50 to-white border border-gray-100 hover:shadow-lg transition-all">
+            <h3 class="text-xl font-semibold mb-4 text-gray-900">Application Hell</h3>
+            <p class="text-gray-600">300+ page LIHTC applications with manual errors causing costly rejections</p>
+          </div>
+          <div class="p-8 rounded-xl bg-gradient-to-b from-gray-50 to-white border border-gray-100 hover:shadow-lg transition-all">
+            <h3 class="text-xl font-semibold mb-4 text-gray-900">Funding Delays</h3>
+            <p class="text-gray-600">6–12 months lost aligning tax credits, bonds, and grants</p>
+          </div>
+          <div class="p-8 rounded-xl bg-gradient-to-b from-gray-50 to-white border border-gray-100 hover:shadow-lg transition-all">
+            <h3 class="text-xl font-semibold mb-4 text-gray-900">Investor Blind Spots</h3>
+            <p class="text-gray-600">Investors struggle to find compliant, high-impact projects matching CRA goals</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="py-20 bg-gradient-to-b from-gray-50 to-white" id="benefits">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-center mb-16">One Platform, Complete Solution</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="p-8 rounded-xl bg-white shadow-lg hover:shadow-xl transition-all border border-gray-100">
+            <h3 class="text-xl font-semibold mb-4 text-gray-900">AI-Powered Application Assistant</h3>
+            <p class="text-gray-600">Auto-populates state-specific QAP checklists with compliance alerts. Reduces application prep time by 50%.</p>
+          </div>
+          <div class="p-8 rounded-xl bg-white shadow-lg hover:shadow-xl transition-all border border-gray-100">
+            <h3 class="text-xl font-semibold mb-4 text-gray-900">Investor Marketplace</h3>
+            <p class="text-gray-600">Match projects with investors targeting CRA credits, transit-oriented developments, or ESG goals.</p>
+          </div>
+          <div class="p-8 rounded-xl bg-white shadow-lg hover:shadow-xl transition-all border border-gray-100">
+            <h3 class="text-xl font-semibold mb-4 text-gray-900">Cost-Saving Tools</h3>
+            <p class="text-gray-600">Prevailing wage calculators + automated Evergreen Standard checklists.</p>
+          </div>
+          <div class="p-8 rounded-xl bg-white shadow-lg hover:shadow-xl transition-all border border-gray-100">
+            <h3 class="text-xl font-semibold mb-4 text-gray-900">Unified Collaboration Hub</h3>
+            <p class="text-gray-600">Work seamlessly with your entire team - Consultants, Lawyers, CPAs, and Contractors. All documents, communications, and workflows in one place.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h2 class="text-3xl font-bold mb-16">Proven Results</h2>
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="p-8 rounded-xl bg-gradient-to-b from-gray-50 to-white border border-gray-100 hover:shadow-lg transition-all">
+              <div class="text-4xl font-bold text-[#00BA34] mb-2">$500K</div>
+              <p class="text-gray-600">Average savings per 100-unit project via streamlined site acquisition</p>
+            </div>
+            <div class="p-8 rounded-xl bg-gradient-to-b from-gray-50 to-white border border-gray-100 hover:shadow-lg transition-all">
+              <div class="text-4xl font-bold text-[#00BA34] mb-2">83%</div>
+              <p class="text-gray-600">Faster investor matchmaking vs. traditional syndication</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-b from-white to-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold mb-8">Ready to Transform Your LIHTC Process?</h2>
+        <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          Join early access and secure tax credits faster while unlocking 10% off pilot pricing.
+        </p>
+        <button 
+          onclick="openScheduler()"
+          class="inline-flex items-center bg-[#00BA34] hover:bg-[#00a82f] text-white px-8 py-3 rounded text-lg">
+          Schedule a Demo 
+          <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-4 w-4" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-white border-t border-gray-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center text-gray-500 text-sm">
+          &copy; 2025 stems. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      
+      mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+      
+      // Scheduler modal functions
+      const schedulerModal = document.getElementById('scheduler-modal');
+      
+      function openScheduler() {
+        schedulerModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+      
+      function closeScheduler() {
+        schedulerModal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+      
+      // Add scroll behavior for navbar
+      window.addEventListener('scroll', () => {
+        const nav = document.querySelector('nav');
+        if (window.scrollY > 20) {
+          nav.classList.add('bg-white/80', 'backdrop-blur-lg', 'shadow-sm');
+          nav.classList.remove('bg-transparent');
+        } else {
+          nav.classList.add('bg-transparent');
+          nav.classList.remove('bg-white/80', 'backdrop-blur-lg', 'shadow-sm');
+        }
+      });
+    </script>
+  </body>
+</html>
+
